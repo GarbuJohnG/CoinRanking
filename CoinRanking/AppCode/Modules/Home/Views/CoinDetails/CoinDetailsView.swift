@@ -92,6 +92,8 @@ struct CoinDetailsView: View {
                 
                 StatisticsView(coinDetails: coinDetails)
                 
+                SocialsBtnsView(coinDetails: coinDetails)
+                
             }
             .padding()
         }
@@ -101,5 +103,5 @@ struct CoinDetailsView: View {
 }
 
 #Preview {
-    CoinDetailsView(coinDetails: .bitCoinMocked)
+    CoinDetailsView(coinDetails: .etheriumMocked)
 }

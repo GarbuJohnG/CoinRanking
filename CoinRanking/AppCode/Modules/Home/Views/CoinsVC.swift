@@ -116,7 +116,6 @@ class CoinsVC: UIViewController {
         
         viewModel.$coins.sink { [weak self] coins in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: { [weak self] in
-                print(coins.count)
                 self?.isLoadingMore = false
                 self?.loadMoreBtn.alpha = 1.0
                 self?.loadMoreBtn.isEnabled = true

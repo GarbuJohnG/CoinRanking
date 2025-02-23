@@ -39,7 +39,7 @@ struct CoinDetail: Codable {
     let lowVolume: Bool?
     let listedAt: Int?
     let hasContent: Bool?
-    let contractAddresses, tags: [String]?
+    let contractAddresses: [String]?
 
     enum CodingKeys: String, CodingKey {
         case uuid, symbol, name, description, color
@@ -49,7 +49,7 @@ struct CoinDetail: Codable {
         case the24HVolume = "24hVolume"
         case marketCap, fullyDilutedMarketCap, price, btcPrice, priceAt, change, rank, sparkline, allTimeHigh
         case coinrankingURL = "coinrankingUrl"
-        case tier, lowVolume, listedAt, hasContent, contractAddresses, tags
+        case tier, lowVolume, listedAt, hasContent, contractAddresses
     }
 }
 
@@ -126,10 +126,93 @@ extension CoinDetail {
                                           hasContent: true,
                                           contractAddresses: [
                                             "okt-chain/0x54e4622dc504176b3bb432dccaf504569699a7ff"
-                                          ],
-                                          tags: [
-                                            "layer-1",
-                                            "proof-of-work",
-                                            "halal"
                                           ])
+    
+    static let etheriumMocked = CoinDetail(uuid: "razxDUgYGNAdQ",
+                                           symbol: "ETH",
+                                           name: "Etherium",
+                                           description: "Ethereum is a global, public decentralized blockchain designed to run peer-to-peer smart contracts and decentralized applications.",
+                                           color: "#3C3C3D",
+                                           iconURL: "https://cdn.coinranking.com/rk4RKHOuW/eth.svg",
+                                           websiteURL: "https://www.ethereum.org",
+                                           links: [
+                                            Link(name: "www.ethereum.org",
+                                                 url: "https://www.ethereum.org",
+                                                 type: "website"),
+                                            Link(name: "etherscan.io",
+                                                 url: "https://etherscan.io/",
+                                                 type: "website"),
+                                            Link(name: "bitcointalk.org",
+                                                 url: "https://bitcointalk.org/index.php?topic=428589.0",
+                                                 type: "bitcointalk"),
+                                            Link(name: "ethereumproject",
+                                                 url: "https://facebook.com/ethereumproject",
+                                                 type: "facebook"),
+                                            Link(name: "ethereum",
+                                                 url: "https://github.com/ethereum",
+                                                 type: "github"),
+                                            Link(name: "ethereum",
+                                                 url: "https://www.reddit.com/r/ethereum/",
+                                                 type: "reddit"),
+                                            Link(name: "ethtrader",
+                                                 url: "https://www.reddit.com/r/ethtrader/",
+                                                 type: "reddit"),
+                                            Link(name: "@ethereum",
+                                                 url: "https://twitter.com/ethereum",
+                                                 type: "twitter"),
+                                            Link(name: "YouTube",
+                                                 url: "https://www.youtube.com/channel/UCNOfzGXD_C9YMYmnefmPH0g",
+                                                 type: "youtube")
+                                           ],
+                                           supply: Supply(confirmed: true, supplyAt: 1740326408, max: nil, total: "120568910.11267465", circulating: "120568910.11267465"),
+                                           numberOfMarkets: 1471,
+                                           numberOfExchanges: 92,
+                                           the24HVolume: "14121997460",
+                                           marketCap: "337817521792",
+                                           fullyDilutedMarketCap: "337817521792",
+                                           price: "2801.862615135362",
+                                           btcPrice: "0.02932861484998847",
+                                           priceAt: 1740327840,
+                                           change: "0.88",
+                                           rank: 2,
+                                           sparkline: [
+                                            "2781.456003327358",
+                                            "2785.9573831375214",
+                                            "2779.285845602352",
+                                            "2766.899028978449",
+                                            "2768.894358638882",
+                                            "2770.2792033482015",
+                                            "2770.6977366900933",
+                                            "2768.2141892881723",
+                                            "2761.753561512477",
+                                            "2766.989955449202",
+                                            "2760.753484963609",
+                                            "2753.9790907464712",
+                                            "2754.259379878762",
+                                            "2776.0228474660007",
+                                            "2788.203456087401",
+                                            "2811.1831528427783",
+                                            "2816.5995942897093",
+                                            "2804.3695013275783",
+                                            "2808.6152171473095",
+                                            "2801.713530724812",
+                                            "2793.3962212169326",
+                                            "2808.539960396304",
+                                            "2803.6391749206655",
+                                            nil
+                                           ], allTimeHigh: AllTimeHigh(price: "4896.8770886838465", timestamp: 1636502400),
+                                           coinrankingURL: "https://coinranking.com/coin/razxDUgYGNAdQ+ethereum-eth",
+                                           tier: 1,
+                                           lowVolume: false,
+                                           listedAt: 1438905600,
+                                           hasContent: true,
+                                           contractAddresses: [
+                                            "solana/2FPyTwcZLUg1MDrwsyoP4D6s1tM7hAkHYRjkNb5w6Pxk",
+                                            "starknet/0x49d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
+                                            "mantle/0xdEAddEaDdeadDEadDEADDEAddEADDEAddead1111",
+                                            "zksync/0x000000000000000000000000000000000000800a",
+                                            "optimism/ ",
+                                            "starknet/0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
+                                            "okt-chain/0xef71ca2ee68f45b9ad6f72fbdb33d707b872315c"
+                                           ])
 }
