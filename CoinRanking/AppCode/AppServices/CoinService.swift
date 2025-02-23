@@ -16,6 +16,15 @@ class CoinService: CoinServiceProtocol {
     
     // MARK: - Fetch Coins
     
+    private var apiKey: String {
+        guard let apiKey = Bundle.main.infoDictionary?["API_KEY"] as? String else {
+            fatalError("Missing API Key!")
+        }
+        return apiKey
+    }
+    
+    // MARK: - Fetch Coins
+    
     func fetchCoins(urlStr: String, completion: @escaping (Result<CoinsModel, Error>) -> Void) {
         performRequest(urlStr: urlStr, completion: completion)
     }
@@ -38,7 +47,7 @@ class CoinService: CoinServiceProtocol {
 
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        request.addValue(Constants.AppKeys.coinRankAPIKey, forHTTPHeaderField: "x-access-token")
+        request.addValue(apiKey, forHTTPHeaderField: "x-access-token")
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {

@@ -18,13 +18,8 @@ struct Constants {
     // MARK: - All App Endpoints
     
     struct Endpoints {
-        
-    }
-    
-    // MARK: - All App Keys
-    
-    struct AppKeys {
-        static let coinRankAPIKey = "coinranking3c63023b3395ae4a403b35962ff07f541626272a42e954a4"
+        static let listCoins = "/coins/"
+        static let coinDetails = "/coin/"
     }
     
 }

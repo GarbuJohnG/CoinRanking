@@ -23,6 +23,22 @@ class ImageCacheManager {
         cacheDirectory = directories[0].appendingPathComponent("ImageCache")
         createCacheDirectoryIfNeeded()
         
+        // MARK: - Preload images from disk to memory on launch
+        preloadCacheFromDisk()
+        
+    }
+    
+    // MARK: - Preload disk cache into memory
+    private func preloadCacheFromDisk() {
+        DispatchQueue.global(qos: .background).async {
+            let contents = (try? self.fileManager.contentsOfDirectory(at: self.cacheDirectory, includingPropertiesForKeys: nil)) ?? []
+            
+            for fileURL in contents {
+                if let image = self.loadImageFromDisk(with: fileURL.lastPathComponent) {
+                    self.memoryCache.setObject(image, forKey: fileURL.lastPathComponent as NSString)
+                }
+            }
+        }
     }
     
     // MARK: - Public Methods
@@ -87,7 +103,8 @@ class ImageCacheManager {
     // MARK: - Private Methods
     
     private func cacheKey(for urlString: String, targetSize: CGSize) -> String {
-        return "\(urlString)_\(targetSize.width)x\(targetSize.height)"
+        let name = urlString.components(separatedBy: "/").last ?? ""
+        return "\(name)_\(targetSize.width)x\(targetSize.height)"
     }
     
     private func createCacheDirectoryIfNeeded() {
@@ -111,6 +128,8 @@ class ImageCacheManager {
         }
         return nil
     }
+    
+    // MARK: - Enforce Cache Size Limits
     
     private func enforceDiskCacheSizeLimit() {
         DispatchQueue.global(qos: .utility).async {

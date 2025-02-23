@@ -14,10 +14,10 @@ class CoinsVC: UIViewController {
     // MARK: - Properties
     
     private var tableView: UITableView!
-    private var footerButton: UIButton!
+    private var loadMoreBtn: UIButton!
     private var isLoadingMore = false
     
-    private var viewModel = CoinsVM()
+    var viewModel: CoinsVM!
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Init
@@ -35,7 +35,7 @@ class CoinsVC: UIViewController {
         setUpProperties()
         setupHierarchy()
         setUpAutoLayout()
-        setupViewModel()
+        setupBindings()
         
         // MARK: - Fetch Coins after setup
         
@@ -52,13 +52,6 @@ class CoinsVC: UIViewController {
     
     private func setUpProperties() {
         
-        footerButton = UIButton(type: .system)
-        footerButton.setTitle("Load More", for: .normal)
-        footerButton.setTitleColor(.white, for: .normal)
-        footerButton.backgroundColor = .systemBlue
-        footerButton.layer.cornerRadius = 10
-        footerButton.addTarget(self, action: #selector(loadMoreTapped), for: .touchUpInside)
-        
         tableView = UITableView()
         tableView.backgroundColor = .systemBackground
         tableView.dataSource = self
@@ -67,16 +60,18 @@ class CoinsVC: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(CoinTableViewCell.self, forCellReuseIdentifier: CoinTableViewCell.reuseIdentifier)
         
+        setupFooterButton()
+        
+        tableView.tableFooterView = createFooterView()
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
-        footerButton.isHidden = true
         
     }
     
     private func setupHierarchy() {
         
         view.addSubview(tableView)
-        tableView.tableFooterView = createFooterView()
         
     }
     
@@ -91,36 +86,42 @@ class CoinsVC: UIViewController {
         
     }
     
+    private func setupFooterButton() {
+        
+        loadMoreBtn = UIButton(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 60))
+        loadMoreBtn.setTitle("Load More...", for: .normal)
+        loadMoreBtn.setTitleColor(UIColor.accent, for: .normal)
+        loadMoreBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        loadMoreBtn.layer.cornerRadius = 8
+        loadMoreBtn.addTarget(self, action: #selector(loadMoreTapped), for: .touchUpInside)
+        
+    }
+    
     private func createFooterView() -> UIView {
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50))
-        footerButton.frame = footerView.bounds
-        footerButton.center = footerView.center
-        footerView.addSubview(footerButton)
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 60))
+        loadMoreBtn.frame = footerView.bounds
+        footerView.addSubview(loadMoreBtn)
         return footerView
+    }
+    
+    private func updateFooterVisibility() {
+        let count = viewModel.coins.count
+        let shouldShowFooter = count > 0 && count < viewModel.maxCoins
+        tableView.tableFooterView = shouldShowFooter ? createFooterView() : nil
     }
     
     // MARK: - Other Functions and Methods
     
-    private func setupViewModel() {
+    private func setupBindings() {
         
         viewModel.$coins.sink { [weak self] coins in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: { [weak self] in
                 print(coins.count)
                 self?.isLoadingMore = false
-                if coins.count > 0 && coins.count < (self?.viewModel.maxCoins ?? 0) {
-                    self?.footerButton.isHidden = false
-                    UIView.animate(withDuration: 0.3) {
-                        self?.footerButton.alpha = 1.0
-                        self?.footerButton.isEnabled = true
-                    }
-                } else {
-                    UIView.animate(withDuration: 0.3) {
-                        self?.footerButton.alpha = 0.0
-                        self?.footerButton.isEnabled = false
-                    }
-                    self?.footerButton.isHidden = true
-                }
+                self?.loadMoreBtn.alpha = 1.0
+                self?.loadMoreBtn.isEnabled = true
                 self?.tableView.reloadData()
+                self?.updateFooterVisibility()
             })
         }
         .store(in: &cancellables)
@@ -153,17 +154,12 @@ class CoinsVC: UIViewController {
     }
     
     @objc private func loadMoreTapped() {
-        guard !isLoadingMore else { return }
-        
-        isLoadingMore = true
-        
-        // Animate fade effect
+        loadMoreBtn.isEnabled = false
         UIView.animate(withDuration: 0.3) {
-            self.footerButton.alpha = 0.5
+            self.loadMoreBtn.alpha = 0.5 
         }
-        
-        footerButton.isEnabled = false
-        
+        guard !isLoadingMore else { return }
+        isLoadingMore = true
         viewModel.fetchCoins()
     }
     
@@ -178,10 +174,11 @@ extension CoinsVC: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let coin = viewModel.coins[indexPath.row]
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CoinTableViewCell.reuseIdentifier, for: indexPath) as? CoinTableViewCell else {
             return UITableViewCell()
         }
-        cell.configure(with: viewModel.coins[indexPath.row])
+        cell.configure(with: coin)
         return cell
     }
 
@@ -189,6 +186,35 @@ extension CoinsVC: UITableViewDataSource, UITableViewDelegate {
         let coin = viewModel.coins[indexPath.row]
         let detailView = CoinDetailsVC(coin: coin)
         navigationController?.pushViewController(detailView, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        guard let coinUUID = viewModel.coins[indexPath.row].uuid else { return nil }
+
+        // Swipe action to add/remove from favorites
+        let favoriteAction = UIContextualAction(style: .normal, title: nil) { [weak self] (_, _, completion) in
+            guard let self = self else { return }
+            
+            self.viewModel.toggleIsFavourite(for: coinUUID)
+            
+            // Reload the row to update the checkmark
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+            completion(true)
+        }
+        
+        // MARK: - Set action's icon and background color
+        
+        if viewModel.isFavourite(coinUUID) {
+            favoriteAction.image = UIImage(systemName: "heart.slash.fill")
+            favoriteAction.backgroundColor = UIColor.systemRed
+        } else {
+            favoriteAction.image = UIImage(systemName: "heart.fill")
+            favoriteAction.backgroundColor = UIColor.systemGreen
+        }
+        
+        return UISwipeActionsConfiguration(actions: [favoriteAction])
+        
     }
     
 }

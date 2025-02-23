@@ -24,19 +24,19 @@ struct SparklineCellView: View {
             let scaledData = data.map { ($0 - data[0]) * 10 }
             
             Text("\(isPositive ? "+" : "")\(String(format: "%.2f", change))")
-                .font(.system(size: 16, weight: .black, design: .rounded))
+                .font(.system(size: 16, weight: .bold, design: .rounded))
                 .foregroundStyle(isPositive ? .green : .red)
                 .frame(maxWidth: 80, alignment: .trailing)
             
             Chart {
                 ForEach(Array(scaledData.enumerated()), id: \.offset) { index, value in
                     LineMark(
-                        x: .value("Index", index),
+                        x: .value("Time", index),
                         y: .value("Value", value)
                     )
                     .interpolationMethod(.catmullRom)
                     AreaMark(
-                        x: .value("Index", index),
+                        x: .value("Time", index),
                         yStart: .value("Min", scaledData.min() ?? 0),
                         yEnd: .value("Value", value)
                     )
@@ -56,6 +56,16 @@ struct SparklineView: View {
     
     let data: [Double]
     let change: Double
+    
+    // MARK: - Generate an array of dates for the past 24 hours
+    
+    var past24Hours: [Date] {
+        let calendar = Calendar.current
+        let now = Date()
+        return (0..<24).map { index in
+            calendar.date(byAdding: .hour, value: -index, to: now)!
+        }.reversed()
+    }
 
     var body: some View {
         
@@ -67,23 +77,43 @@ struct SparklineView: View {
             
             let scaledData = data.map { ($0 - data[0]) * 10 }
             
+            // MARK: - Filter out nil values and pair with time
+            
+            var filteredData: [(Date, Double)] {
+                Array(zip(past24Hours, scaledData.compactMap { $0 }))
+            }
+            
             Chart {
-                ForEach(Array(scaledData.enumerated()), id: \.offset) { index, value in
+                ForEach(filteredData, id: \.0) { date, value in
                     LineMark(
-                        x: .value("Index", index),
-                        y: .value("Value", value)
+                        x: .value("Time", date),
+                        y: .value("Amount", value)
                     )
                     .interpolationMethod(.catmullRom)
+                    
                     AreaMark(
-                        x: .value("Index", index),
-                        yStart: .value("Min", scaledData.min() ?? 0),
-                        yEnd: .value("Value", value)
+                        x: .value("Time", date),
+                        yStart: .value("Min", filteredData.map { $0.1 }.min() ?? 0),
+                        yEnd: .value("Amount", value)
                     )
                     .interpolationMethod(.catmullRom)
-                    .foregroundStyle(LinearGradient(colors: [isPositive ? .green : .red, .clear], startPoint: .top, endPoint: .bottom))
+                    .foregroundStyle(LinearGradient(
+                        colors: [isPositive ? .green : .red, .clear],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    ))
                 }
             }
-            .chartXAxis(.hidden)
+            .chartXAxis {
+                AxisMarks(values: .stride(by: .hour, count: 6)) { value in
+                    AxisGridLine()
+                    AxisTick()
+                    AxisValueLabel(format: .dateTime.hour())
+                }
+            }
+            .chartYAxis {
+                AxisMarks(position: .leading)
+            }
             .foregroundStyle(isPositive ? .green : .red)
             .frame(height: 250)
         }

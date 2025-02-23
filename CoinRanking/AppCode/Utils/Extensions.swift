@@ -48,6 +48,23 @@ extension String {
         }
     }
     
+    func formatMultiDecimalNumbers() -> String {
+        guard let number = Double(self) else { return "" }
+        
+        switch number {
+        case 1_000_000_000_000...:
+            return String(format: "%.5f T", number / 1_000_000_000_000)
+        case 1_000_000_000...:
+            return String(format: "%.5f B", number / 1_000_000_000)
+        case 1_000_000...:
+            return String(format: "%.5f M", number / 1_000_000)
+        case 1_000...:
+            return String(format: "%.5f K", number / 1_000)
+        default:
+            return String(format: "%.5f", number)
+        }
+    }
+    
 }
 
 extension UIViewController {

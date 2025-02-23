@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		5ECA3B9A2D6892E000F28885 /* SVGKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5ECA3B992D6892E000F28885 /* SVGKit */; };
+		5ECA3BB62D6B0E0D00F28885 /* appconfig.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5ECA3BB52D6B0E0D00F28885 /* appconfig.xcconfig */; };
+		5ECA3BB72D6B0E0D00F28885 /* appconfig.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5ECA3BB52D6B0E0D00F28885 /* appconfig.xcconfig */; };
+		5ECA3BB82D6B0E0D00F28885 /* appconfig.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5ECA3BB52D6B0E0D00F28885 /* appconfig.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +34,7 @@
 		5ECA3B202D6835D000F28885 /* CoinRanking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinRanking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5ECA3B362D6835D300F28885 /* CoinRankingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoinRankingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5ECA3B402D6835D300F28885 /* CoinRankingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoinRankingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5ECA3BB52D6B0E0D00F28885 /* appconfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = appconfig.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -93,6 +97,7 @@
 		5ECA3B172D6835D000F28885 = {
 			isa = PBXGroup;
 			children = (
+				5ECA3BB52D6B0E0D00F28885 /* appconfig.xcconfig */,
 				5ECA3B222D6835D000F28885 /* CoinRanking */,
 				5ECA3B392D6835D300F28885 /* CoinRankingTests */,
 				5ECA3B432D6835D300F28885 /* CoinRankingUITests */,
@@ -234,6 +239,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5ECA3BB62D6B0E0D00F28885 /* appconfig.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,6 +247,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5ECA3BB72D6B0E0D00F28885 /* appconfig.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +255,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5ECA3BB82D6B0E0D00F28885 /* appconfig.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

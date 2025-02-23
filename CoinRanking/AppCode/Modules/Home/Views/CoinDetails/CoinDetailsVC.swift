@@ -40,8 +40,6 @@ class CoinDetailsVC: UIViewController {
         
         setupNavigationBar()
         setUpProperties()
-        setupHierarchy()
-        setUpAutoLayout()
         setupViewModel()
         
         // MARK: - Fetch Coin Details after setup
@@ -60,14 +58,6 @@ class CoinDetailsVC: UIViewController {
     private func setUpProperties() {
         
         self.view.backgroundColor = .systemBackground
-        
-    }
-    
-    private func setupHierarchy() {
-        
-    }
-    
-    private func setUpAutoLayout() {
         
     }
     

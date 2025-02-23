@@ -16,8 +16,8 @@ struct StatisticsView: View {
     }
     
     let columns = [
-        GridItem(.flexible(), spacing: 10),
-        GridItem(.flexible(), spacing: 10)
+        GridItem(.flexible(), spacing: 20),
+        GridItem(.flexible(), spacing: 20)
     ]
     
     var body: some View {
@@ -26,29 +26,28 @@ struct StatisticsView: View {
                 .font(.system(size: 18, weight: .bold, design: .rounded))
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            LazyVGrid(columns: columns, spacing: 10) {
+            LazyVGrid(columns: columns, spacing: 20) {
                 ForEach(statisticItems, id: \.title) { item in
                     StatisticItem(title: item.title, value: item.value)
                 }
             }
         }
-        .padding()
     }
     
     // MARK: - Statistic items
     private var statisticItems: [StatisticItemData] {
         [
-            StatisticItemData(title: "Mkt Cap", value: "$\(viewModel.coinDetails.marketCap?.formatLargeNumbers() ?? "")"),
-            StatisticItemData(title: "Volume", value: "$\(viewModel.coinDetails.the24HVolume?.formatLargeNumbers() ?? "")"),
-            StatisticItemData(title: "All Time High", value: "$\(viewModel.coinDetails.allTimeHigh?.price?.formatLargeNumbers() ?? "")"),
+            StatisticItemData(title: "Mkt Cap", value: "$\(viewModel.coinDetails.marketCap?.formatLargeNumbers() ?? "N/A")"),
+            StatisticItemData(title: "Volume", value: "$\(viewModel.coinDetails.the24HVolume?.formatLargeNumbers() ?? "N/A")"),
+            StatisticItemData(title: "All Time High", value: "$\(viewModel.coinDetails.allTimeHigh?.price?.formatLargeNumbers() ?? "N/A")"),
             StatisticItemData(title: "Exchange Listings", value: "\(viewModel.coinDetails.numberOfExchanges ?? 0)"),
-            StatisticItemData(title: "Circulating Supply", value: viewModel.coinDetails.supply?.circulating ?? "N/A"),
-            StatisticItemData(title: "Total Supply", value: viewModel.coinDetails.supply?.total ?? "N/A"),
-            StatisticItemData(title: "Max Supply", value: viewModel.coinDetails.supply?.max ?? "N/A"),
+            StatisticItemData(title: "Circulating Supply", value: viewModel.coinDetails.supply?.circulating?.formatLargeNumbers() ?? "N/A"),
+            StatisticItemData(title: "Total Supply", value: viewModel.coinDetails.supply?.total?.formatLargeNumbers() ?? "N/A"),
+            StatisticItemData(title: "Max Supply", value: viewModel.coinDetails.supply?.max?.formatLargeNumbers() ?? "N/A"),
             StatisticItemData(title: "Markets", value: "\(viewModel.coinDetails.numberOfMarkets ?? 0)"),
-            StatisticItemData(title: "Fully Diluted Value", value: viewModel.coinDetails.fullyDilutedMarketCap?.formatLargeNumbers() ?? ""),
-            StatisticItemData(title: "Price in BTC", value: "\(viewModel.coinDetails.btcPrice ?? "N/A") BTC"),
-            StatisticItemData(title: "% \(viewModel.coinDetails.symbol?.uppercased() ?? "") in circulation", value: "\(viewModel.calculatePercentCirculating()) %"),
+            StatisticItemData(title: "Fully Diluted Value", value: viewModel.coinDetails.fullyDilutedMarketCap?.formatLargeNumbers() ?? "N/A"),
+            StatisticItemData(title: "Price in BTC", value: "\(viewModel.coinDetails.btcPrice?.formatMultiDecimalNumbers() ?? "N/A") BTC"),
+            StatisticItemData(title: "% \(viewModel.coinDetails.symbol?.uppercased() ?? "N/A") in circulation", value: "\(viewModel.calculatePercentCirculating()) %"),
             StatisticItemData(title: "Listing date", value: viewModel.getDateListed())
         ]
     }

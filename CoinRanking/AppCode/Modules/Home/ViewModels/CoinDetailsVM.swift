@@ -25,6 +25,8 @@ class CoinDetailsVM: ObservableObject {
         self.coinService = coinService
         self.coin = coin
     }
+    
+    // MARK: - Fetch Coin Details
 
     func fetchCoinDetails() {
         
@@ -35,7 +37,7 @@ class CoinDetailsVM: ObservableObject {
         
         isFetching = true
         
-        let urlString = "\(Constants.URLs.baseUrl)/coin/\(coin.uuid ?? "")"
+        let urlString = "\(Constants.URLs.baseUrl)\(Constants.Endpoints.coinDetails)\(coin.uuid ?? "")"
         
         coinService.fetchCoinDetails(urlStr: urlString) { [weak self] result in
             
