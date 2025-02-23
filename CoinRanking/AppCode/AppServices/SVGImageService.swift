@@ -36,6 +36,7 @@ class ImageCacheManager {
             for fileURL in contents {
                 if let image = self.loadImageFromDisk(with: fileURL.lastPathComponent) {
                     self.memoryCache.setObject(image, forKey: fileURL.lastPathComponent as NSString)
+                    print(fileURL.lastPathComponent)
                 }
             }
         }

@@ -29,6 +29,15 @@ final class CoinRankingUITests: XCTestCase {
         app.launch()
 
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let tabBar = app.tabBars["Tab Bar"]
+        tabBar.buttons["Favorites"].tap()
+        tabBar.buttons["Home"].tap()
+        app.tables.children(matching: .cell).element(boundBy: 0).children(matching: .other).element(boundBy: 0).tap()
+        app.navigationBars["BTC"].buttons["Home"].tap()
+        app.navigationBars["Home"].buttons["filter"].tap()
+        app.sheets["Sort Coins"].scrollViews.otherElements.buttons["Highest Price"].tap()
+        
     }
 
     @MainActor
@@ -40,4 +49,5 @@ final class CoinRankingUITests: XCTestCase {
             }
         }
     }
+    
 }
