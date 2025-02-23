@@ -31,11 +31,11 @@ On clicking any cell either on the home page or the favorites page more coin spe
 
 ## Libraries Used
 
-- SVGKit - [SVGKit](https://github.com/SVGKit/SVGKit.git)). **Justification**: SwiftUI's AsyncImage does not support svg images so as a workaround I chose to download the svg data using SVGKit to turn it to an image.
+- SVGKit - [SVGKit](https://github.com/SVGKit/SVGKit.git). **Justification**: SwiftUI's AsyncImage does not support svg images so as a workaround I chose to download the svg data using SVGKit to turn it to an image.
 
 ## Challenges Encountered
 
-- One of the challenges faced was displaying the svg images the API provides. I was able to fix this by downloading the svg data and using the [SVGKit](https://github.com/SVGKit/SVGKit.git)) library, convert it to an image. This posed another concurrency challenge leading me to use multithreading to allow proper management of the many download requests. The images were then cached to avoid repeating the multiple download calls thus reducing network activity and processing overhead.
+- One of the challenges faced was displaying the svg images the API provides. I was able to fix this by downloading the svg data and using the [SVGKit](https://github.com/SVGKit/SVGKit.git) library, convert it to an image. This posed another concurrency challenge leading me to use multithreading to allow proper management of the many download requests. The images were then cached to avoid repeating the multiple download calls thus reducing network activity and processing overhead.
 
 ## Tech and Structures
 - [x] URLSession
