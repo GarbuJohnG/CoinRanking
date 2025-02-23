@@ -12,6 +12,8 @@ It's built using Swift, leveraging programmatic UIKit for the major Views and UI
 
 Pull or download the project to your machine and run 'CoinRanking.xcodeproj' using XCode. Build and run the app on the preferred simulator or device (NOTE: You'll have to register the AppID with your Developer ID to run it on your Device).
 
+Create an _appconfig.xcconfig_ file and add a [CoinRanking](https://coinranking.com) Api Key in the format "_API_KEY = coinranking_api_key_". This is to allow one access the APIs from [CoinRanking](https://coinranking.com). A sample config file has been provided "_appconfig_example.xcconfig_" for reference.
+
 ## App Use
 
 On app launch, a call is made to [CoinRanking](https://coinranking.com) to fetch a list of Coins. These coins are limited to 20 per call implemented in a paginated way where it incrementally up until it gets to the maximum specified 100 Coins. 
@@ -38,6 +40,7 @@ On clicking any cell either on the home page or the favorites page more coin spe
 - One of the challenges faced was displaying the svg images the API provides. I was able to fix this by downloading the svg data and using the [SVGKit](https://github.com/SVGKit/SVGKit.git) library, convert it to an image. This posed another concurrency challenge leading me to use multithreading to allow proper management of the many download requests. The images were then cached to avoid repeating the multiple download calls thus reducing network activity and processing overhead.
 
 ## Tech and Structures
+
 - [x] URLSession
 - [X] RESTful APIs
 - [x] SwiftUI
@@ -48,3 +51,12 @@ On clicking any cell either on the home page or the favorites page more coin spe
 - [x] FileManager
 
 ## Screenshots
+
+![Simulator Screenshot - iPhone 16 Pro - 2025-02-23 at 16 42 18](https://github.com/user-attachments/assets/571da11a-2cd1-4c03-9be7-e937599eceee)
+![Simulator Screenshot - iPhone 16 Pro - 2025-02-23 at 16 42 33](https://github.com/user-attachments/assets/26f3fe16-9317-4d71-9c40-d19cb03c62cd)
+![Simulator Screenshot - iPhone 16 Pro - 2025-02-23 at 16 42 38](https://github.com/user-attachments/assets/d55948f3-884e-40f8-a3b0-4b834556cc71)
+![Simulator Screenshot - iPhone 16 Pro - 2025-02-23 at 16 42 24](https://github.com/user-attachments/assets/1ed40c0b-d5e4-462f-95ec-2528b03d89ec)
+![Simulator Screenshot - iPhone 16 Pro - 2025-02-23 at 16 42 51](https://github.com/user-attachments/assets/f7bc7763-8052-41cd-a8f3-8ee2775c4aae)
+![Simulator Screenshot - iPhone 16 Pro - 2025-02-23 at 16 43 01](https://github.com/user-attachments/assets/7e1cbff7-15ac-497c-886f-270d8eb7ef16)
+
+
