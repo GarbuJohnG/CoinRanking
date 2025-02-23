@@ -79,6 +79,14 @@ class CoinDetailsVC: UIViewController {
         }
         .store(in: &cancellables)
         
+        viewModel.$error.sink { [weak self] error in
+            if let error = error {
+                self?.showError(error)
+                self?.viewModel.error = nil
+            }
+        }
+        .store(in: &cancellables)
+        
     }
     
     func addCoinDetsView(coinDetails: CoinDetail) {
@@ -100,6 +108,12 @@ class CoinDetailsVC: UIViewController {
     }
     
     // MARK: - Other Functions and Methods
+    
+    func showError(_ error: String) {
+        let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: .default))
+        present(alert, animated: true)
+    }
     
     
     

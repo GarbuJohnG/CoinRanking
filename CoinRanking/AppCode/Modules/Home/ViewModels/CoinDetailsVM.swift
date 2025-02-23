@@ -46,7 +46,12 @@ class CoinDetailsVM: ObservableObject {
             
             switch result {
             case .success(let response):
-                self.coinDetails = response.data?.coin
+                if let coin = response.data?.coin {
+                    self.coinDetails = coin
+                } else {
+                    print("No coin details at the moment please retry", response)
+                    self.error = "No coin details at the moment please retry"
+                }
             case .failure(let error):
                 print("Error fetching coins: \(error.localizedDescription)")
                 self.error = "Error fetching coins: \(error.localizedDescription)"
