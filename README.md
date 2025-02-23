@@ -38,6 +38,7 @@ On clicking any cell either on the home page or the favorites page more coin spe
 - One of the challenges faced was displaying the svg images the API provides. I was able to fix this by downloading the svg data and using the [SVGKit](https://github.com/SVGKit/SVGKit.git) library, convert it to an image. This posed another concurrency challenge leading me to use multithreading to allow proper management of the many download requests. The images were then cached to avoid repeating the multiple download calls thus reducing network activity and processing overhead.
 
 ## Tech and Structures
+
 - [x] URLSession
 - [X] RESTful APIs
 - [x] SwiftUI
@@ -48,3 +49,12 @@ On clicking any cell either on the home page or the favorites page more coin spe
 - [x] FileManager
 
 ## Screenshots
+
+![Simulator Screenshot - iPhone 16 Pro - 2025-02-23 at 16 42 18](https://github.com/user-attachments/assets/571da11a-2cd1-4c03-9be7-e937599eceee)
+![Simulator Screenshot - iPhone 16 Pro - 2025-02-23 at 16 42 33](https://github.com/user-attachments/assets/26f3fe16-9317-4d71-9c40-d19cb03c62cd)
+![Simulator Screenshot - iPhone 16 Pro - 2025-02-23 at 16 42 38](https://github.com/user-attachments/assets/d55948f3-884e-40f8-a3b0-4b834556cc71)
+![Simulator Screenshot - iPhone 16 Pro - 2025-02-23 at 16 42 24](https://github.com/user-attachments/assets/1ed40c0b-d5e4-462f-95ec-2528b03d89ec)
+![Simulator Screenshot - iPhone 16 Pro - 2025-02-23 at 16 42 51](https://github.com/user-attachments/assets/f7bc7763-8052-41cd-a8f3-8ee2775c4aae)
+![Simulator Screenshot - iPhone 16 Pro - 2025-02-23 at 16 43 01](https://github.com/user-attachments/assets/7e1cbff7-15ac-497c-886f-270d8eb7ef16)
+
+
