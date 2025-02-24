@@ -59,4 +59,10 @@ On clicking any cell either on the home page or the favorites page more coin spe
 ![Simulator Screenshot - iPhone 16 Pro - 2025-02-23 at 16 42 51](https://github.com/user-attachments/assets/f7bc7763-8052-41cd-a8f3-8ee2775c4aae)
 ![Simulator Screenshot - iPhone 16 Pro - 2025-02-23 at 16 43 01](https://github.com/user-attachments/assets/7e1cbff7-15ac-497c-886f-270d8eb7ef16)
 
+- App supoorts dark mode
+
+![Simulator Screenshot - iPhone 16 Pro - 2025-02-24 at 09 24 46](https://github.com/user-attachments/assets/4fd4255c-3b03-42f5-ac1d-5f41e8d04138)
+![Simulator Screenshot - iPhone 16 Pro - 2025-02-24 at 09 24 36](https://github.com/user-attachments/assets/97849617-65a1-4312-8596-763f9b64b27b)
+
+
 
