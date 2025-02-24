@@ -12,7 +12,7 @@ It's built using Swift, leveraging programmatic UIKit for the major Views and UI
 
 Pull or download the project to your machine and run 'CoinRanking.xcodeproj' using XCode. Build and run the app on the preferred simulator or device (NOTE: You'll have to register the AppID with your Developer ID to run it on your Device).
 
-Add a [CoinRanking](https://coinranking.com) Api Key to the App by replacing "_coinranking_api_key_" with your API key in the "_appconfigs.xcconfig_" file. This is to allow one access the APIs from [CoinRanking](https://coinranking.com).
+Add a [CoinRanking](https://coinranking.com) Api Key to the App by replacing "_coinranking_api_key_" with your API key in the "_appconfigs.xcconfig_" file within the root folder of your app. This is to allow one access the APIs from [CoinRanking](https://coinranking.com). Once done, drag the file into your project in the root folder and associate it with your target in this case "_CoinRanking_". Once done, rebuild and run.
 
 ## App Use
 
