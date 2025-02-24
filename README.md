@@ -12,7 +12,7 @@ It's built using Swift, leveraging programmatic UIKit for the major Views and UI
 
 Pull or download the project to your machine and run 'CoinRanking.xcodeproj' using XCode. Build and run the app on the preferred simulator or device (NOTE: You'll have to register the AppID with your Developer ID to run it on your Device).
 
-Create an _appconfig.xcconfig_ file and add a [CoinRanking](https://coinranking.com) Api Key in the format "_API_KEY = coinranking_api_key_". This is to allow one access the APIs from [CoinRanking](https://coinranking.com). A sample config file has been provided "_appconfig_example.xcconfig_" for reference.
+Add a [CoinRanking](https://coinranking.com) Api Key to the App by replacing "_coinranking_api_key_" with your API key in the "_appconfigs.xcconfig_" file within the root folder of your app. This is to allow one access the APIs from [CoinRanking](https://coinranking.com). Once done, drag the file into your project in the root folder and associate it with your target in this case "_CoinRanking_". Once done, rebuild and run.
 
 ## App Use
 
@@ -58,5 +58,11 @@ On clicking any cell either on the home page or the favorites page more coin spe
 ![Simulator Screenshot - iPhone 16 Pro - 2025-02-23 at 16 42 24](https://github.com/user-attachments/assets/1ed40c0b-d5e4-462f-95ec-2528b03d89ec)
 ![Simulator Screenshot - iPhone 16 Pro - 2025-02-23 at 16 42 51](https://github.com/user-attachments/assets/f7bc7763-8052-41cd-a8f3-8ee2775c4aae)
 ![Simulator Screenshot - iPhone 16 Pro - 2025-02-23 at 16 43 01](https://github.com/user-attachments/assets/7e1cbff7-15ac-497c-886f-270d8eb7ef16)
+
+- App supoorts dark mode
+
+![Simulator Screenshot - iPhone 16 Pro - 2025-02-24 at 09 24 46](https://github.com/user-attachments/assets/4fd4255c-3b03-42f5-ac1d-5f41e8d04138)
+![Simulator Screenshot - iPhone 16 Pro - 2025-02-24 at 09 24 36](https://github.com/user-attachments/assets/97849617-65a1-4312-8596-763f9b64b27b)
+
 
 
