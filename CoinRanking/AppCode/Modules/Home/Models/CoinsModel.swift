@@ -22,25 +22,18 @@ struct DataClass: Codable {
 
 // MARK: - Coin
 struct Coin: Codable {
-    let uuid, symbol, name, color: String?
+    let uuid, symbol, name: String?
     let iconURL: String?
     let marketCap, price: String?
-    let listedAt, tier: Int?
+    let tier: Int?
     let change: String?
     let rank: Int?
     let sparkline: [String?]?
-    let lowVolume: Bool?
-    let coinrankingURL: String?
-    let the24HVolume, btcPrice: String?
-    let contractAddresses: [String]?
-
+    
     enum CodingKeys: String, CodingKey {
-        case uuid, symbol, name, color
+        case uuid, symbol, name
         case iconURL = "iconUrl"
-        case marketCap, price, listedAt, tier, change, rank, sparkline, lowVolume
-        case coinrankingURL = "coinrankingUrl"
-        case the24HVolume = "24hVolume"
-        case btcPrice, contractAddresses
+        case marketCap, price, tier, change, rank, sparkline
     }
 }
 
@@ -48,7 +41,7 @@ struct Coin: Codable {
 struct Stats: Codable {
     let total, totalCoins, totalMarkets, totalExchanges: Int?
     let totalMarketCap, total24HVolume: String?
-
+    
     enum CodingKeys: String, CodingKey {
         case total, totalCoins, totalMarkets, totalExchanges, totalMarketCap
         case total24HVolume = "total24hVolume"
@@ -59,11 +52,9 @@ extension Coin {
     static let bitCoinMocked = Coin(uuid: "Qwsogvtv82FCd",
                                     symbol: "BTC",
                                     name: "Bitcoin",
-                                    color: "#f7931A",
                                     iconURL: "https://cdn.coinranking.com/bOabBYkcX/bitcoin_btc.svg",
                                     marketCap: "1954122628099",
                                     price: "98558.0126594903",
-                                    listedAt: 1330214400,
                                     tier: 1,
                                     change: "1.64",
                                     rank: 1,
@@ -89,20 +80,15 @@ extension Coin {
                                                 "98304.27162888189",
                                                 "98208.77825876347",
                                                 "98241.08906645776",
-                                                "98310.30286530688"],
-                                    lowVolume: false,
-                                    coinrankingURL: "https://coinranking.com/coin/Qwsogvtv82FCd+bitcoin-btc",
-                                    the24HVolume: "27172108550",
-                                    btcPrice: "1",
-                                    contractAddresses: [])
+                                                "98310.30286530688",
+                                                nil])
+    
     static let etheriumMocked = Coin(uuid: "razxDUgYGNAdQ",
                                      symbol: "ETH",
                                      name: "Ethereum",
-                                     color: "#3C3C3D",
                                      iconURL: "https://cdn.coinranking.com/rk4RKHOuW/eth.svg",
                                      marketCap: "333422180534",
                                      price: "2765.5756484966632",
-                                     listedAt: 1438905600,
                                      tier: 1,
                                      change: "1.38",
                                      rank: 2,
@@ -129,13 +115,5 @@ extension Coin {
                                                  "2743.416327374805",
                                                  "2749.16481006808",
                                                  "2751.9763203647617",
-                                                 nil],
-                                     lowVolume: false,
-                                     coinrankingURL: "https://coinranking.com/coin/razxDUgYGNAdQ+ethereum-eth",
-                                     the24HVolume: "11761291781",
-                                     btcPrice: "0.02806038366511606",
-                                     contractAddresses: ["solana/2FPyTwcZLUg1MDrwsyoP4D6s1tM7hAkHYRjkNb5w6Pxk",
-                                                         "starknet/0x49d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
-                                                         "mantle/0xdEAddEaDdeadDEadDEADDEAddEADDEAddead1111",
-                                                         "zksync/0x000000000000000000000000000000000000800a"])
+                                                 nil])
 }

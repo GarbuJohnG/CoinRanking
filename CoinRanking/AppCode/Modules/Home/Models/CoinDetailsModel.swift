@@ -35,11 +35,7 @@ struct CoinDetail: Codable {
     let sparkline: [String?]?
     let allTimeHigh: AllTimeHigh?
     let coinrankingURL: String?
-    let tier: Int?
-    let lowVolume: Bool?
     let listedAt: Int?
-    let hasContent: Bool?
-    let contractAddresses: [String]?
 
     enum CodingKeys: String, CodingKey {
         case uuid, symbol, name, description, color
@@ -49,7 +45,7 @@ struct CoinDetail: Codable {
         case the24HVolume = "24hVolume"
         case marketCap, fullyDilutedMarketCap, price, btcPrice, priceAt, change, rank, sparkline, allTimeHigh
         case coinrankingURL = "coinrankingUrl"
-        case tier, lowVolume, listedAt, hasContent, contractAddresses
+        case listedAt
     }
 }
 
@@ -120,13 +116,7 @@ extension CoinDetail {
                                         ],
                                           allTimeHigh: AllTimeHigh(price: "108912.02046606789", timestamp: 1737364200),
                                           coinrankingURL: "https://coinranking.com/coin/Qwsogvtv82FCd+bitcoin-btc",
-                                          tier: 1,
-                                          lowVolume: false,
-                                          listedAt: 1330214400,
-                                          hasContent: true,
-                                          contractAddresses: [
-                                            "okt-chain/0x54e4622dc504176b3bb432dccaf504569699a7ff"
-                                          ])
+                                          listedAt: 1330214400)
     
     static let etheriumMocked = CoinDetail(uuid: "razxDUgYGNAdQ",
                                            symbol: "ETH",
@@ -202,17 +192,5 @@ extension CoinDetail {
                                             nil
                                            ], allTimeHigh: AllTimeHigh(price: "4896.8770886838465", timestamp: 1636502400),
                                            coinrankingURL: "https://coinranking.com/coin/razxDUgYGNAdQ+ethereum-eth",
-                                           tier: 1,
-                                           lowVolume: false,
-                                           listedAt: 1438905600,
-                                           hasContent: true,
-                                           contractAddresses: [
-                                            "solana/2FPyTwcZLUg1MDrwsyoP4D6s1tM7hAkHYRjkNb5w6Pxk",
-                                            "starknet/0x49d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
-                                            "mantle/0xdEAddEaDdeadDEadDEADDEAddEADDEAddead1111",
-                                            "zksync/0x000000000000000000000000000000000000800a",
-                                            "optimism/ ",
-                                            "starknet/0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
-                                            "okt-chain/0xef71ca2ee68f45b9ad6f72fbdb33d707b872315c"
-                                           ])
+                                           listedAt: 1438905600)
 }
